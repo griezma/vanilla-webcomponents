@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Required: npm install -g browser-sync
+browser-sync src -w

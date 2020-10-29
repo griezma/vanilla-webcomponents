@@ -1,0 +1,9 @@
+html {
+    font-family: sans-serif
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Hello</title>
+</head>
+<body>
+    <header>
+        <h1>Vanilla JS</h1>
+    </header>
+    <main>
+        <div class="buttons">
+            <my-button color="red" clicks="0" label="Click me"></my-button>
+            <my-button color="blue" clicks="0" label="Click me more"></my-button>
+            <my-button color="green" clicks="0" label="Click me too"></my-button>
+        </div>
+
+        <hr>
+
+        <my-dropdown label="Dropdown" 
+            option="a"
+            options='{"a": {"label": "Option A"}, "b": {"label": "Option B"}}'>
+        </my-dropdown>
+    </main>
+    <script src="app.js" type="module"></script>
+</body>
+</html>
