@@ -4,25 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Hello</title>
+    <title>webstandard components</title>
 </head>
 <body>
-    <header>
-        <h1>Vanilla JS</h1>
-    </header>
     <main>
-        <div class="buttons">
-            <my-button color="red" clicks="0" label="Click me"></my-button>
-            <my-button color="blue" clicks="0" label="Click me more"></my-button>
-            <my-button color="green" clicks="0" label="Click me too"></my-button>
-        </div>
+        <header>
+            <h1>Vanillajs components</h1>
+            <h3>pure webstandards, almost</h3>
+        </header>
 
-        <hr>
+        <section>
+            <h2>[my-button] PlainElement buttons - webstandards only </h2>
+            <div class="buttons">
+                <my-button color="red" clicks="0" label="Click me"></my-button>
+                <my-button color="blue" clicks="0">Click more</my-button>
+                <my-button color="green" clicks="0" label="Click me too"></my-button>
+            </div>
+        </section>
 
-        <my-dropdown label="Dropdown" 
-            option="a"
-            options='{"a": {"label": "Option A"}, "b": {"label": "Option B"}}'>
-        </my-dropdown>
+        <section>
+            <h2>[my-dropdown] PlainElement dropdown</h2>
+            <my-dropdown label="Dropdown" 
+                option="a"
+                options='{"a": {"label": "Option A"}, "b": {"label": "Option B"}}'>
+            </my-dropdown>
+        </section>
+
+        <section>
+            <h2>[lith-button] LithElement button - using lit-html</h2>
+            <div class="buttons">
+                <lith-button color="red">A</lith-button>
+                <lith-button color="blue">B</lith-button>
+                <lith-button color="green">C</lith-button>
+                <lith-button color="brown">D</lith-button>
+                <lith-button color="magenta">E</lith-button>
+                <lith-button color="gold">F</lith-button>
+            </div>
+        </section>
+
+        <section>
+            <h2> [ugly-paper] PlainElement component - using custom html import</h2>
+            <ugly-paper>
+                <span slot="header">first title</span>
+                bla bla bla <bold>bla</bold>
+            </ugly-paper>
+
+            <ugly-paper>
+                <span slot="header">second title</span>
+                text text text <h1>bla</h1>
+            </ugly-paper>
+        </section>
     </main>
     <script src="app.js" type="module"></script>
 </body>
