@@ -1,0 +1,50 @@
+<template>
+    <style>
+        :host {
+            font-size: 1em;
+            display: inline-block;
+            margin-right: 20px;
+            border: 2px solid #eee;
+        }
+        article {
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            
+            width: 250px;
+            height: 300px;
+        }
+        header {
+            background-color: rebeccapurple;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 16px 8px;
+        }
+        main {
+            padding: 0 8px;
+            flex: 1;
+            border-bottom: 1px solid #eee;
+        }
+        footer {
+            padding: 8px;
+            height: 5%;
+            font-size: .8em;
+            background-color: green;
+            color: white;
+        }
+        footer a {
+            color: white;
+        }
+    </style>
+    <article>
+        <header>
+            <slot name="header"></slot>
+        </header>
+        <main>
+            <h6>Stuff</h6>  
+            <slot></slot>
+        </main>
+        <footer><slot name="footer"><a href="#">more...</a></slot></footer>
+    </article>
+</template>

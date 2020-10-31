@@ -1,4 +1,4 @@
-import html from './html.js'
+import { html, PlainElement } from '/plain-element.js'
 
 const template = html`
     <style>
@@ -33,39 +33,30 @@ const template = html`
 `;
 
 
-export class MyButton extends HTMLElement {
+class MyButton extends PlainElement {
+    
+    static get observedAttributes() {
+        return ['color', 'clicks', 'label'];
+    }
 
     constructor() {
         super();
-
-        // console.log("created", this.label);
-
-        this.root = this.attachShadow({mode: 'open'});
         this.root.innerHTML = template(this);
-
         this.$button = this.root.querySelector("button");
         this.$container = this.root.querySelector(".container");
-
-        const sClicks = this.getAttribute("clicks");
-        sClicks && (this.clicks = parseInt(sClicks));
-
-        if (this.asAtom) {
-            this.$container.style.padding = '0';
-        }
     }
 
     connectedCallback() {
-        // console.log("connected", this.label);
-        this.$button.addEventListener("click", this.handleClick);
-        this.render();
+        this.$button.addEventListener("click", this._handleClick);
+        this.updateView();
     }
 
     disconnectedCallback() {
         // console.log("disconnected", this.label);
-        this.$button.removeEventListener("click", this.handleClick);
+        this.$button.removeEventListener("click", this._handleClick);
     }
 
-    handleClick = _ => {
+    _handleClick = _ => {
         this.dispatchEvent(new CustomEvent('onClick', { detail: 'good click' }));
         
         if ('clicks' in this) {
@@ -74,38 +65,8 @@ export class MyButton extends HTMLElement {
         }
     }
 
-    static get observedAttributes() {
-        return ['label', 'color'];
-    }
-    
-    attributeChangedCallback(name, old, value) {
-        console.log("changed", name, old, value);
-        this.render();
-    }
-    
-    get asAtom() {
-        return this.hasAttribute('as-atom');
-    }
-
     set onClick(handler) {
         this.addEventListener('onClick', handler);
-    }
-
-    get label() {
-        return this.getAttribute("label");
-    }
-
-    set label(value) {
-        console.log('setLabel', value);
-        this.setAttribute('label', value);
-    }
-
-    get color() {
-        return this.getAttribute("color") || "grey";
-    }
-
-    set color(value) {
-        this.setAttribute("color", value);
     }
 
     get buttonStyle() {
@@ -113,11 +74,21 @@ export class MyButton extends HTMLElement {
         return `color:${color};border-color:${color}`;
     }
 
+    get label() {
+        return this.getAttribute("label") || this.originalContent;
+    }
+
+    set label(value) {
+        this.setAttribute("label", value);
+    }
+
     render() {
         this.$button.style.cssText = this.buttonStyle;
-
-        const label = this.clicks ? `${this.label} (${this.clicks} clicks)` : this.label;
+        const label = this.clicks>0 ? `${this.label} (${this.clicks} clicks)` : this.label;
         this.$button.innerHTML = label;
+        if ('as-atom' in this) {
+            this.$container.style.padding = '0';
+        }
     }
 }
 
