@@ -56,14 +56,16 @@ function wait(ms) {
 
 class PlainElement extends HTMLElement {
 
-    constructor() {
+    constructor(shadow = true) {
         super();
-        this.originalContent = this.firstChild?.data;
-        this.root = this.attachShadow({mode: 'open'});
+        if (shadow) {
+            this.root = this.attachShadow({mode: 'open'});
+        } else {
+            this.root = this;
+        }
     }
 
     connectedCallback() {
-        console.log("connected", this.tagName);
         this.updateView();
     }
 
@@ -72,8 +74,12 @@ class PlainElement extends HTMLElement {
         
         if (value !== old) {
             this[name] = value;
-            this.updateView();
+            this.onChanged(name, old, value);
         }
+    }
+
+    onChanged(name, old, value) {
+        this.updateView();
     }
 
     loadTemplate(metaurl, basename = this.tagName.toLowerCase()) {
@@ -98,7 +104,7 @@ class PlainElement extends HTMLElement {
     render() {}
 
     updateView() {
-        console.log("updateView");
+        // console.log("updateView");
         this.render();
     }
 }

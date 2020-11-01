@@ -57,13 +57,13 @@ class MyDropdown extends HTMLElement {
     constructor() {
         super();
 
-        this.root = this.attachShadow({mode: 'open'});
-        this.root.innerHTML = template;
+        this.attachShadow({mode: 'open'});
+        this.shadowRoot.innerHTML = template;
 
-        this.$dropdown = this.root.querySelector(".dropdown");
-        this.$label = this.root.querySelector(".label");
-        this.$button = this.root.querySelector("my-button");
-        this.$ul = this.root.querySelector("ul");
+        this.$dropdown = this.shadowRoot.querySelector(".dropdown");
+        this.$label = this.shadowRoot.querySelector(".label");
+        this.$button = this.shadowRoot.querySelector("my-button");
+        this.$ul = this.shadowRoot.querySelector("ul");
 
         this.$button.onClick = this.toggleOpen;
         this.$ul.onclick = this.selectOption;

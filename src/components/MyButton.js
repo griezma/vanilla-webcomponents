@@ -41,9 +41,9 @@ class MyButton extends PlainElement {
 
     constructor() {
         super();
-        this.root.innerHTML = template(this);
-        this.$button = this.root.querySelector("button");
-        this.$container = this.root.querySelector(".container");
+        this.shadowRoot.innerHTML = template(this);
+        this.$button = this.shadowRoot.querySelector("button");
+        this.$container = this.shadowRoot.querySelector(".container");
     }
 
     connectedCallback() {
@@ -75,7 +75,7 @@ class MyButton extends PlainElement {
     }
 
     get label() {
-        return this.getAttribute("label") || this.originalContent;
+        return this.getAttribute("label") || this.innerHTML;
     }
 
     set label(value) {
@@ -85,7 +85,7 @@ class MyButton extends PlainElement {
     render() {
         this.$button.style.cssText = this.buttonStyle;
         const label = this.clicks>0 ? `${this.label} (${this.clicks} clicks)` : this.label;
-        this.$button.innerHTML = label;
+        this.$button.innerText = label;
         if ('as-atom' in this) {
             this.$container.style.padding = '0';
         }

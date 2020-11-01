@@ -7,7 +7,6 @@ class LithButton extends LithElement {
 
     constructor() {
         super();
-        console.log("create");
     }
 
     handleClick = () => {
@@ -23,7 +22,7 @@ class LithButton extends LithElement {
     }
 
     getLabel() {
-        const label = this.label || this.originalContent;
+        const label = this.label || this.innerHTML;
         return this.clicks !== undefined ? `${label} (${this.clicks})` : label;
     }
 

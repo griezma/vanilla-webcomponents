@@ -3,14 +3,13 @@
         :host {
             font-size: 1em;
             display: inline-block;
-            margin-right: 20px;
-            border: 2px solid #eee;
+            margin: 20px 20px 0 0;
+            box-shadow: 3px 3px 6px #777;
         }
         article {
             display: flex;
             flex-direction: column;
             justify-content: stretch;
-            
             width: 250px;
             height: 300px;
         }
@@ -45,6 +44,6 @@
             <h6>Stuff</h6>  
             <slot></slot>
         </main>
-        <footer><slot name="footer"><a href="#">more...</a></slot></footer>
+        <footer><slot name="footer"><a href="#!">more...</a></slot></footer>
     </article>
 </template>

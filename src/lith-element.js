@@ -6,8 +6,8 @@ class LithElement extends HTMLElement {
 
     constructor() {
         super();
-        this.originalContent = this.firstChild?.data;
-        this.root = this.attachShadow({mode: 'open'}); 
+        // sets this.shadowRoot
+        this.attachShadow({mode: 'open'}); 
     }
 
     connectedCallback() {
@@ -21,10 +21,14 @@ class LithElement extends HTMLElement {
         this.updateView();
     }
 
+    get childText() {
+        return this.firstChild?.data;
+    }
+
     render() {}
 
     updateView() {
         // console.log("updateView");
-        render(this.render(), this.root);
+        render(this.render(), this.shadowRoot);
     }
 }
