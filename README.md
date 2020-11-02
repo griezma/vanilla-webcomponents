@@ -1,5 +1,5 @@
 # Vanilla Webcomponents
 
-just playing around with plain web standards
+playing with plain standards
 
 no frameworks, no libraries, no buildtools
