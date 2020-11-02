@@ -2,7 +2,7 @@ import './components/MyButton.js'
 import './components/MyDropdown.js'
 import './components/LithButton.js'
 import './components/UglyPaper.js'
-import './components/WsTimer.js'
+import './components/WcTimer.js'
 
 const first = document.querySelector("my-button")
 setTimeout(_ => { first.label = "Click me now" }, 2000);

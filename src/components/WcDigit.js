@@ -1,16 +1,7 @@
 import { html, PlainElement } from "/plain-element.js"
+import { interpInt, interpColor } from "/interpolate.js"
 
-function interp(from, to, steps, index) {
-    const inc = (to - from) / (steps - 1);
-    return from + inc * index; 
-}
-
-function pad(value, width, pad='0') {
-    return value.padStart(width, pad);
-
-}
-
-class WsDigit extends PlainElement {
+class WcDigit extends PlainElement {
     
     static get observedAttributes() {
         return ["freq", "first", "last"];
@@ -18,7 +9,7 @@ class WsDigit extends PlainElement {
     
     value = 0;
     first = 0;
-    last = 10;
+    last = 9;
     
     constructor() {
         super(false);
@@ -55,7 +46,7 @@ class WsDigit extends PlainElement {
 
     tick(first, last) {
         // console.log("tick", last);
-        this.value = (this.value + 1) % last + first;
+        this.value = first + (this.value + 1) % (last + 1);
         this.updateView();
     }
 
@@ -64,22 +55,20 @@ class WsDigit extends PlainElement {
         const out = this.$out;
 
         const steps = this.last - this.first;
-        const fw = Math.round(interp(100, 900, steps, value));
         
-        const nColor = Math.round(interp(0x007777, 0xff0000, steps, value));    
-        const color = '#' + pad(nColor.toString(16), 6, '0');
+        const fontWeight = interpInt(100, 900, steps)(value);
+        const color = interpColor(0x007777, 0xff0000, steps)(value);
+        const borderWidth = Math.round(2 * value);
 
-        const bw = Math.round(3 * value);
-
-        // console.log("value", value, "fw", fw, "color", color);
+        console.log("value", value, "fw", fontWeight, "color", color);
 
         const { style } = out;
-        style.fontWeight = fw;
+        style.fontWeight = fontWeight;
         style.color = color;
-        style.borderTop = `${bw}px solid ${color}`;
+        style.borderTop = `${borderWidth}px solid ${color}`;
 
         this.$out.innerText = this.value;
     }
 }
 
-customElements.define("ws-digit", WsDigit);
+customElements.define("wc-digit", WcDigit);
